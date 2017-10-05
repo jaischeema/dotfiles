@@ -7,7 +7,7 @@ gitconfig = "~/.gitconfig"
 gitignore = "~/.gitignore"
 ssh_config = "~/.ssh/config"
 tigrc = "~/.tigrc"
-vimrc = "~/config/nvim/init.vim"
+vimrc = "~/.config/nvim/init.vim"
 zshrc = "~/.zshrc"
 zshenv = "~/.zshenv"
 
