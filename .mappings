@@ -1,0 +1,22 @@
+# vim: ft=toml
+
+[general]
+ctags = "~/.ctags"
+gitattributes = "~/.gitattributes"
+gitconfig = "~/.gitconfig"
+gitignore = "~/.gitignore"
+ssh_config = "~/.ssh/config"
+tigrc = "~/.tigrc"
+vimrc = "~/config/nvim/init.vim"
+zshrc = "~/.zshrc"
+zshenv = "~/.zshenv"
+
+# Link in parts from private submodule
+"private/ssh" = "~/.ssh"
+"private/zshenv" = "~/.zshenv_private"
+
+[linux]
+
+[freebsd]
+
+[macos]

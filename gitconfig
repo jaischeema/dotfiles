@@ -1,0 +1,62 @@
+[user]
+  name = Jais Cheema
+  email = jaischeema@gmail.com
+[core]
+  editor = nvim
+  autocrlf = input
+  whitespace = trailing-space,space-before-tab
+  excludesfile = /Users/jais/.gitignore
+  pager = less -+$LESS -FRX
+  quotepath = false
+[color]
+  ui = auto
+  branch = auto
+  status = auto
+  diff = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[merge]
+  tool = opendiff
+[mergetool]
+  keepBackup = false
+  prompt = false
+[push]
+  default = tracking
+  recurseSubmodules = check
+[diff]
+  color-words =
+  compactionHeuristic = true
+[difftool]
+  prompt = false
+[credential]
+  helper = osxkeychain
+[credential "https://github.com"]
+  username = jaischeema
+[gui]
+  fontdiff = -family Consolas -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+[tig]
+  line-graphics = "utf-8"
+  mouse = true
+  refresh-mode = auto
+[tig "bind"]
+  status = + !git commit --amend
+  status = C !git commit --verbose
+  status = X <git commit --verbose
+[help]
+  autoCorrect = 20
+[rerere]
+  enabled = true
+[diff "exif"]
+  textconv = exiftool
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true

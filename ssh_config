@@ -1,0 +1,6 @@
+ServerAliveInterval 120
+TCPKeepAlive yes
+ControlPersist 60
+ForwardAgent yes
+
+Include config_private

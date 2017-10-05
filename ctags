@@ -1,0 +1,36 @@
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/
+--regex-markdown=/^##[ \t]+(.*)/\1/i,Heading_L2/
+--regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
+
+--langdef=coffee
+--langmap=coffee:.coffee
+--regex-coffee=/(^|=[ \t])*class ([A-Za-z]+\.)*([A-Za-z]+)( extends [A-Za-z_.]+)?$/\3/c,class/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?([A-Za-z_.]+):.*[-=]>.*$/\3/m,method/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?([A-Za-z_.]+)[ \t]+=.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*([A-Za-z_.]+)[ \t]+=[^->\n]*$/\1/v,variable/
+--regex-coffee=/^[ \t]*@([A-Za-z_.]+)[ \t]+=[^->\n]*$/\1/f,field/
+--regex-coffee=/^[ \t]*@([A-Za-z_.]+):[^->\n]*$/\1/f,static field/
+--regex-coffee=/^[ \t]*([A-Za-z_.]+):[^->\n]*$/\1/f,field/
+--regex-coffee=/constructor:[ \t]+\([ \t]*@([A-Za-z_.]+)/\1/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){1}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){2}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){3}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){4}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){5}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){6}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){7}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){8}/\2/f,field/
+--regex-coffee=/constructor:[ \t]+\(([ \t]*@[A-Za-z_.]+[^,)]*,[ \t]*@([A-Za-z_.]+)){9}/\2/f,field/
+
+--regex-ruby=/^[ \t]*scope[ \t]*:([a-zA-Z0-9_]+)/\1/s,scopes/
+--regex-ruby=/^[ \t]*(has_many|has_one|belongs_to)[ \t]*:([a-zA-Z0-9_]+)/\2/a,associations/
+
+--langdef=Elm
+--langmap=Elm:.elm
+--regex-Elm=/^ *([[:lower:]][[:alnum:]_]+)[[:blank:]]*:[^:].*->.*/\1/f,function,functions/
+--regex-Elm=/^ *([[:lower:]][[:alnum:]_]+)[[:blank:]]*:[^:][^-]+$/\1/c,constant,constants/
+--regex-Elm=/^port +([[:lower:]][[:alnum:]_]+)[[:blank:]]*:[^:]/\1/p,port,ports/
+--regex-Elm=/^type +([[:upper:]][[:alnum:]_]+)/\1/t,type,types/
+--regex-Elm=/^type[[:blank:]]+alias[[:blank:]]+([[:upper:]][[:alnum:]_]+)/\1/a,type-alias,type-aliases/

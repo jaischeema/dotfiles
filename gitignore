@@ -1,0 +1,12 @@
+.DS_Store
+.vagrant
+Vagrantfile
+tags
+!tags/
+tags.lock
+tags.temp
+*.swp
+.Trashes
+*.swp
+.vimrc
+.RData
