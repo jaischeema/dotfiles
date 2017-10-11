@@ -85,7 +85,6 @@ set ignorecase "case-insenitive searching
 set smartcase "do a case-sensitive search if uppercase letters are present
 set hlsearch "highlight search results
 set incsearch
-set inccommand=split
 
 " -------------------------------------------- PaperColor
 " set t_Co=256
@@ -101,7 +100,6 @@ map <LEADER>f :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 24
 let g:NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 
 " -------------------------------------------- Elm
 let g:polyglot_disabled = ['elm']

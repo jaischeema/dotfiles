@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 DEFAULT_USER="jais"
 ZSH_THEME="agnoster"
 
-plugins=(brew cargo gem git heroku history-substring-search postgres rails bundler zsh-syntax-highlighting)
+plugins=(brew cargo gem git heroku history-substring-search bundler zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

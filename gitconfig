@@ -5,7 +5,7 @@
   editor = nvim
   autocrlf = input
   whitespace = trailing-space,space-before-tab
-  excludesfile = /Users/jais/.gitignore
+  excludesfile = ~/.gitignore
   pager = less -+$LESS -FRX
   quotepath = false
 [color]

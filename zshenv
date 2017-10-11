@@ -1,6 +1,9 @@
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$HOME/.local/bin:$HOME/.rbenv/plugins/ruby-build/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+
+. "/usr/local/opt/nvm/nvm.sh"
 
 export EDITOR="nvim"
 
