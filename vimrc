@@ -25,13 +25,13 @@ Plug 'pbogut/deoplete-elm'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'w0rp/ale'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Neoterm utils
-Plug 'neomake/neomake'
 Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
 
@@ -143,13 +143,10 @@ command! -nargs=+ Troute :T rake routes | grep <args>
 command! Tmigrate :T rake db:migrate
 command! -nargs=+ Tg :T git <args>
 
-" ------------------------------------------- Neomake
-let g:neomake_ruby_enabled_makers = ['rubocop', 'reek', 'mri']
-let g:neomake_elixir_enabled_makers = []
-let g:neomake_elm_enabled_makers = []
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-autocmd! BufWritePost * Neomake
+" --------------------------------------------  ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
 " --------------------------------------------  vim-test
 let test#strategy = 'neoterm'
