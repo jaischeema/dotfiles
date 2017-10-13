@@ -3,17 +3,19 @@
 [general]
 ctags = "~/.ctags"
 gitattributes = "~/.gitattributes"
-gitconfig = "~/.gitconfig"
+gitconfig = "~/.config/git/config"
 gitignore = "~/.gitignore"
 tigrc = "~/.tigrc"
 vimrc = "~/.config/nvim/init.vim"
 zshrc = "~/.zshrc"
 zshenv = "~/.zshenv"
+asdfrc = "~/.asdfrc"
 
 # Link in parts from private submodule
 "private/ssh" = "~/.ssh"
 ssh_config = "~/.ssh/config"
 "private/zshenv" = "~/.zshenv_private"
+"private/gitconfig" = "~/.config/git/config_private"
 
 [linux]
 

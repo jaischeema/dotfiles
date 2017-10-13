@@ -1,6 +1,5 @@
 [user]
   name = Jais Cheema
-  email = jaischeema@gmail.com
 [core]
   editor = nvim
   autocrlf = input
@@ -60,3 +59,7 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[commit]
+  gpgsign = true
+[include]
+  path = config_private

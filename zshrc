@@ -9,4 +9,4 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(rbenv init -)"
+source $HOME/.asdf/asdf.sh
