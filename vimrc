@@ -46,6 +46,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'chrisbra/csv.vim'
 Plug 'jceb/vim-orgmode'
+Plug 'fatih/vim-go'
 
 " Nice to have
 Plug 'justinmk/vim-gtfo'
@@ -139,9 +140,12 @@ nnoremap <silent> ,tl :call neoterm#clear()<cr>
 nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
 command! Troutes :T rake routes
+command! CargoRun :T cargo run
 command! -nargs=+ Troute :T rake routes | grep <args>
 command! Tmigrate :T rake db:migrate
 command! -nargs=+ Tg :T git <args>
+
+nnoremap <silent> <leader>r :CargoRun<CR>
 
 " ------------------------------------------- Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop', 'reek', 'mri']
@@ -161,6 +165,7 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+
 " --------------------------------------------  UltiSnip
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -172,6 +177,7 @@ let g:ackprg = 'ag --vimgrep'
 let g:signify_vcs_list = ['git']
 let g:gtfo#terminals = { 'mac': 'iterm' }
 let g:vim_markdown_folding_disabled = 1
+let g:rustfmt_autosave = 1
 
 
 nnoremap \ :Ag<SPACE>
