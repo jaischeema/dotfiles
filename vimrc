@@ -126,8 +126,9 @@ nnoremap <C-t>H :History:<CR>
 nnoremap <C-t>/ :History/<CR>
 
 " -------------------------------------------- Neoterm
-let g:neoterm_position = 'vertical'
+let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
+let g:neoterm_size = '25%'
 let g:neoterm_shell = 'zsh'
 let g:neoterm_autoscroll = 1
 
