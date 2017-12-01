@@ -40,8 +40,8 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 
 " Language
+Plug 'mdxprograms/elm-vim' " Revert back to elmcast/elm-vim once the issue has been fixed
 Plug 'sheerun/vim-polyglot'
-Plug 'elmcast/elm-vim'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'chrisbra/csv.vim'
