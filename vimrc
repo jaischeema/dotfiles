@@ -169,8 +169,6 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " --------------------------------------------  UltiSnip
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " -------------------------------------------- Misc Plugins
 let g:airline_powerline_fonts = 1
