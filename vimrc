@@ -17,14 +17,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
+Plug 'rstacruz/vim-closer'
 Plug 'dkprice/vim-easygrep'
 Plug 'ludovicchabant/vim-gutentags' " Keep tags file upto date
 Plug 'junegunn/vim-peekaboo' " Easy access to the registers
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'pbogut/deoplete-elm'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'rstacruz/vim-closer'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -37,7 +38,7 @@ Plug 'janko-m/vim-test'
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'rakr/vim-one'
 
 " Language
 Plug 'mdxprograms/elm-vim' " Revert back to elmcast/elm-vim once the issue has been fixed
@@ -45,8 +46,16 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'chrisbra/csv.vim'
-Plug 'jceb/vim-orgmode'
 Plug 'fatih/vim-go'
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'eagletmt/neco-ghc'
+Plug 'ledger/vim-ledger'
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Nice to have
 Plug 'justinmk/vim-gtfo'
@@ -69,7 +78,7 @@ set backspace=indent,eol,start "lazy backspacing
 set showcmd "show the current command
 set laststatus=2 "always show the status line. always!
 set lazyredraw
-set fillchars+=vert:\ 
+set fillchars+=vert:│
 set number
 set noswapfile
 set completeopt=longest,menuone
@@ -87,14 +96,9 @@ set smartcase "do a case-sensitive search if uppercase letters are present
 set hlsearch "highlight search results
 set incsearch
 
-" -------------------------------------------- PaperColor
-" set t_Co=256
-" set background=light
-" colorscheme PaperColor
-
 " -------------------------------------------- Gruvbox
 set background=dark
-colorscheme gruvbox
+colorscheme one " gruvbox
 
 " -------------------------------------------- NerdTree
 map <LEADER>f :NERDTreeToggle<CR>
@@ -103,7 +107,7 @@ let g:NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " -------------------------------------------- Elm
-let g:polyglot_disabled = ['elm']
+let g:polyglot_disabled = ['elm', 'haskell']
 let g:elm_detailed_complete = 1
 let g:elm_format_autosave = 1
 let g:deoplete#enable_at_startup = 1
@@ -126,8 +130,6 @@ nnoremap <C-t>H :History:<CR>
 nnoremap <C-t>/ :History/<CR>
 
 " -------------------------------------------- Neoterm
-let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
 let g:neoterm_size = '25%'
 let g:neoterm_shell = 'zsh'
 let g:neoterm_autoscroll = 1
@@ -149,7 +151,7 @@ command! -nargs=+ Tg :T git <args>
 nnoremap <silent> <leader>r :CargoRun<CR>
 
 " ------------------------------------------- Neomake
-let g:neomake_ruby_enabled_makers = ['rubocop', 'reek', 'mri']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 let g:neomake_elixir_enabled_makers = []
 let g:neomake_elm_enabled_makers = []
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -172,6 +174,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " -------------------------------------------- Misc Plugins
 let g:airline_powerline_fonts = 1
+let g:airline_theme='one'
 let g:ackprg = 'ag --vimgrep'
 let g:signify_vcs_list = ['git']
 let g:gtfo#terminals = { 'mac': 'iterm' }
@@ -243,14 +246,20 @@ nmap ga <Plug>(EasyAlign)
 " Run a given vim command on the results of alt from a given path.
 " See usage below.
 function! AltCommand(path, vim_command)
-	let l:alternate = system("find . -path ./_site -prune -or -path ./target -prune -or -path ./.DS_Store -prune -or -path ./build -prune -or -path ./Carthage -prune -or -path tags -prune -or -path ./tmp -prune -or -path ./log -prune -or -path ./.git -prune -or -type f -print | alt -f - " . a:path)
-	if empty(l:alternate)
-		echo "No alternate file for " . a:path . " exists!"
-	else
-		exec a:vim_command . " " . l:alternate
-	endif
+  let l:alternate = system("alt " . a:path)
+  if empty(l:alternate)
+    echo "No alternate file for " . a:path . " exists!"
+  else
+    exec a:vim_command . " " . l:alternate
+  endif
 endfunction
 
 " Find the alternate file for the current path and open it
 nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 nnoremap <leader>> :w<cr>:call AltCommand(expand('%'), ':vsplit')<cr>
+
+" Language server config
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }

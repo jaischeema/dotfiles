@@ -1,6 +1,4 @@
-export PATH="/usr/local/heroku/bin:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-
+export PATH="/usr/local/bin:/usr/local/heroku/bin:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR="nvim"
 
 # This will open files at the specified line in vim if the last argument
@@ -27,5 +25,6 @@ alias gcleanmerged="git checkout master && git branch --merged | grep -v \\* | x
 alias ts="tig status"
 alias gh="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(.*)\.git/https\:\/\/github.com\/\1\/\2/p' | xargs open"
 alias ghp="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(.*)\.git/https\:\/\/github.com\/\1\/\2\/pulls/p' | xargs open"
+alias hl="hledger"
 
 source "$HOME/.zshenv_private"
