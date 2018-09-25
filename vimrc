@@ -19,7 +19,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'rstacruz/vim-closer'
 Plug 'dkprice/vim-easygrep'
-Plug 'ludovicchabant/vim-gutentags' " Keep tags file upto date
+" Plug 'ludovicchabant/vim-gutentags' " Keep tags file upto date
 Plug 'junegunn/vim-peekaboo' " Easy access to the registers
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'pbogut/deoplete-elm'
@@ -41,7 +41,7 @@ Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
 
 " Language
-Plug 'mdxprograms/elm-vim' " Revert back to elmcast/elm-vim once the issue has been fixed
+Plug 'elmcast/elm-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
@@ -98,12 +98,13 @@ set incsearch
 
 " -------------------------------------------- Gruvbox
 set background=dark
-colorscheme one " gruvbox
+colorscheme gruvbox
 
 " -------------------------------------------- NerdTree
 map <LEADER>f :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 24
 let g:NERDTreeMinimalUI = 1
+let NERDTreeIgnore = ['\.bs\.js$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " -------------------------------------------- Elm
@@ -131,6 +132,7 @@ nnoremap <C-t>/ :History/<CR>
 
 " -------------------------------------------- Neoterm
 let g:neoterm_size = '25%'
+let g:neoterm_default_mod = 'leftabove'
 let g:neoterm_shell = 'zsh'
 let g:neoterm_autoscroll = 1
 
@@ -143,7 +145,6 @@ nnoremap <silent> ,tl :call neoterm#clear()<cr>
 nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
 command! Troutes :T rake routes
-command! CargoRun :T cargo run
 command! -nargs=+ Troute :T rake routes | grep <args>
 command! Tmigrate :T rake db:migrate
 command! -nargs=+ Tg :T git <args>
@@ -174,7 +175,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " -------------------------------------------- Misc Plugins
 let g:airline_powerline_fonts = 1
-let g:airline_theme='one'
 let g:ackprg = 'ag --vimgrep'
 let g:signify_vcs_list = ['git']
 let g:gtfo#terminals = { 'mac': 'iterm' }
