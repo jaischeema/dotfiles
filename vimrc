@@ -19,7 +19,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'rstacruz/vim-closer'
 Plug 'dkprice/vim-easygrep'
-" Plug 'ludovicchabant/vim-gutentags' " Keep tags file upto date
 Plug 'junegunn/vim-peekaboo' " Easy access to the registers
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'pbogut/deoplete-elm'
@@ -153,7 +152,7 @@ nnoremap <silent> <leader>r :CargoRun<CR>
 
 " ------------------------------------------- Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
-let g:neomake_elixir_enabled_makers = []
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 let g:neomake_elm_enabled_makers = []
 let g:neomake_javascript_enabled_makers = ['eslint']
 
@@ -172,6 +171,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " --------------------------------------------  UltiSnip
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 " -------------------------------------------- Misc Plugins
 let g:airline_powerline_fonts = 1
@@ -180,7 +180,6 @@ let g:signify_vcs_list = ['git']
 let g:gtfo#terminals = { 'mac': 'iterm' }
 let g:vim_markdown_folding_disabled = 1
 let g:rustfmt_autosave = 1
-
 
 nnoremap \ :Ag<SPACE>
 nnoremap K :Ag<SPACE><C-R><C-W><CR>
@@ -260,6 +259,10 @@ nnoremap <leader>> :w<cr>:call AltCommand(expand('%'), ':vsplit')<cr>
 
 " Language server config
 let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'reason': ['/Users/jais/.local/reason-language-server.exe']
     \ }
+
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
+nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
