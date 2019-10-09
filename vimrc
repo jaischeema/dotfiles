@@ -113,12 +113,19 @@ let g:elm_format_autosave = 1
 let g:deoplete#enable_at_startup = 1
 
 " -------------------------------------------- FZF
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
 nnoremap <C-p> :GitFiles<CR>
 nnoremap <C-t>f :Files<CR>
 nnoremap <C-t>F :GitFiles<CR>
 nnoremap <C-t>G :GitFiles?<CR>
 nnoremap <C-t>b :Buffers<CR>
-nnoremap <C-t>a :Ag
+nnoremap <C-t>a :Rg
 nnoremap <C-t>L :Lines<CR>
 nnoremap <C-t>l :BLines<CR>
 nnoremap <C-t>T :Tags<CR>
@@ -175,14 +182,14 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 " -------------------------------------------- Misc Plugins
 let g:airline_powerline_fonts = 1
-let g:ackprg = 'ag --vimgrep'
+let g:ackprg = 'rg --vimgrep --no-heading'
 let g:signify_vcs_list = ['git']
 let g:gtfo#terminals = { 'mac': 'iterm' }
 let g:vim_markdown_folding_disabled = 1
 let g:rustfmt_autosave = 1
 
-nnoremap \ :Ag<SPACE>
-nnoremap K :Ag<SPACE><C-R><C-W><CR>
+nnoremap \ :Rg<SPACE>
+nnoremap K :Rg<SPACE><C-R><C-W><CR>
 
 " -------------------------------------------- Shortcuts
 " Helpers to compensate for all different when saving or quiting
