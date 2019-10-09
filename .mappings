@@ -9,13 +9,12 @@ tigrc = "~/.tigrc"
 vimrc = "~/.config/nvim/init.vim"
 zshrc = "~/.zshrc"
 zshenv = "~/.zshenv"
-asdfrc = "~/.asdfrc"
 
 # Link in parts from private submodule
-"private/ssh" = "~/.ssh"
-ssh_config = "~/.ssh/config"
+"private/ssh_config" = "~/.ssh/config_private"
 "private/zshenv" = "~/.zshenv_private"
 "private/gitconfig" = "~/.config/git/config_private"
+"private/ssh-keys" = "~/.ssh/keys"
 
 [linux]
 
