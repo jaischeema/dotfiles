@@ -18,6 +18,7 @@ function v() {
   fi
 }
 
+alias ag="rg"
 alias gt="git log --graph --format=format:'%c(bold blue)%h%c(reset) - %c(bold green)(%ar)%c(reset) %c(white)%s%c(reset) %c(bold white)— %an%c(reset)%c(bold yellow)%d%c(reset)' --abbrev-commit --date=relative"
 alias vim="nvim"
 alias vv="nvim"
@@ -27,10 +28,5 @@ alias ts="tig status"
 alias gh="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(.*)\.git/https\:\/\/github.com\/\1\/\2/p' | xargs open"
 alias ghp="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(.*)\.git/https\:\/\/github.com\/\1\/\2\/pulls/p' | xargs open"
 alias hl="hledger"
-
-alias nickle-start="docker run -v /Users/jais/Documents:/root/docs -d -p 3612:3612 -e DB_USER=jais -e DB_HOST=host.docker.internal -e PORT=3612 nickle:latest"
-alias nickle-stop='docker container stop `docker ps --filter ancestor=nickle --format "{{.ID}}"`'
-alias nickle-console='docker exec -i -t `docker ps --filter ancestor=nickle --format "{{.ID}}"` bundle exec rails c'
-alias nickle="open http://localhost:3612/app"
 
 source "$HOME/.zshenv_private"
