@@ -21,7 +21,6 @@ Plug 'rstacruz/vim-closer'
 Plug 'dkprice/vim-easygrep'
 Plug 'junegunn/vim-peekaboo' " Easy access to the registers
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'pbogut/deoplete-elm'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'rstacruz/vim-closer'
@@ -40,7 +39,7 @@ Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
 
 " Language
-Plug 'elmcast/elm-vim'
+Plug 'andys8/vim-elm-syntax'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
@@ -160,7 +159,6 @@ nnoremap <silent> <leader>r :CargoRun<CR>
 " ------------------------------------------- Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-let g:neomake_elm_enabled_makers = []
 let g:neomake_javascript_enabled_makers = ['eslint']
 
 autocmd! BufWritePost * Neomake
@@ -267,8 +265,14 @@ nnoremap <leader>> :w<cr>:call AltCommand(expand('%'), ':vsplit')<cr>
 " Language server config
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'reason': ['/Users/jais/.local/reason-language-server.exe']
+    \ 'reason': ['/Users/jais/.local/reason-language-server.exe'],
+    \ 'elm': ['elm-language-server']
     \ }
+
+
+let g:LanguageClient_rootMarkers = {
+  \ 'elm': ['elm.json'],
+  \ }
 
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
