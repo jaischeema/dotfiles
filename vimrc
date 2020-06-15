@@ -1,29 +1,27 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Base
-Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'godlygeek/tabular'
+Plug 'gregsexton/MatchTag' " Highlight matching HTML tags
+Plug 'honza/vim-snippets'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'tomtom/tlib_vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'mileszs/ack.vim'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'gregsexton/MatchTag' " Highlight matching HTML tags
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-abolish'
-Plug 'rstacruz/vim-closer'
-Plug 'dkprice/vim-easygrep'
 Plug 'junegunn/vim-peekaboo' " Easy access to the registers
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'godlygeek/tabular'
+Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'plasticboy/vim-markdown'
 Plug 'rstacruz/vim-closer'
+Plug 'scrooloose/nerdtree'
+Plug 'tomtom/tcomment_vim'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -40,20 +38,16 @@ Plug 'rakr/vim-one'
 
 " Language
 Plug 'andys8/vim-elm-syntax'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
 Plug 'chrisbra/csv.vim'
-Plug 'fatih/vim-go'
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'eagletmt/neco-ghc'
+Plug 'fatih/vim-go'
 Plug 'ledger/vim-ledger'
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neovimhaskell/haskell-vim'
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'udalov/kotlin-vim'
 
 " Nice to have
 Plug 'justinmk/vim-gtfo'
@@ -87,6 +81,10 @@ set hidden
 set autoread
 set mouse=a
 set synmaxcol=200 " Fix for the issue with really long lines
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 " -------------------------------------------- Search
 set ignorecase "case-insenitive searching
@@ -106,10 +104,9 @@ let NERDTreeIgnore = ['\.bs\.js$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " -------------------------------------------- Elm
-let g:polyglot_disabled = ['elm', 'haskell']
+let g:polyglot_disabled = ['elm', 'haskell', 'kotlin']
 let g:elm_detailed_complete = 1
 let g:elm_format_autosave = 1
-let g:deoplete#enable_at_startup = 1
 
 " -------------------------------------------- FZF
 command! -bang -nargs=* Rg
@@ -238,7 +235,7 @@ nnoremap <leader>ev        :e $MYVIMRC<CR>
 nnoremap <leader><leader>v :source $MYVIMRC<CR>
 nnoremap <F2>              :NERDTreeToggle<CR>
 nnoremap <leader>n         :NERDTreeFind<CR>
-nnoremap <leader>j         :FixWhitespace<CR>
+nnoremap <leader>j         :StripWhitespace<CR>
 nnoremap nw                :set nowrap<CR>
 
 map <leader>c <c-_><c-_>
@@ -262,18 +259,27 @@ endfunction
 nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 nnoremap <leader>> :w<cr>:call AltCommand(expand('%'), ':vsplit')<cr>
 
-" Language server config
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'reason': ['/Users/jais/.local/reason-language-server.exe'],
-    \ 'elm': ['elm-language-server']
-    \ }
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-let g:LanguageClient_rootMarkers = {
-  \ 'elm': ['elm.json'],
-  \ }
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=? Fold   :call CocAction('fold', <f-args>)
+command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>m  :<C-u>CocList marketplace<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
