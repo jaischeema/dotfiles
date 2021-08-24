@@ -1,3 +1,5 @@
+let g:polyglot_disabled = ['elm', 'haskell', 'kotlin', 'go', 'typescript', 'javascript']
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Base
@@ -40,7 +42,7 @@ Plug 'rakr/vim-one'
 Plug 'andys8/vim-elm-syntax'
 Plug 'chrisbra/csv.vim'
 Plug 'eagletmt/neco-ghc'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ledger/vim-ledger'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'reasonml-editor/vim-reason-plus'
@@ -48,6 +50,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
 Plug 'udalov/kotlin-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Nice to have
 Plug 'justinmk/vim-gtfo'
@@ -95,6 +100,10 @@ set incsearch
 " -------------------------------------------- Gruvbox
 set background=dark
 colorscheme gruvbox
+autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
+autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
+autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
+autocmd ColorScheme * highlight SignColumn guibg=#adadad
 
 " -------------------------------------------- NerdTree
 map <LEADER>f :NERDTreeToggle<CR>
@@ -104,7 +113,6 @@ let NERDTreeIgnore = ['\.bs\.js$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " -------------------------------------------- Elm
-let g:polyglot_disabled = ['elm', 'haskell', 'kotlin']
 let g:elm_detailed_complete = 1
 let g:elm_format_autosave = 1
 
@@ -259,6 +267,34 @@ endfunction
 nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 nnoremap <leader>> :w<cr>:call AltCommand(expand('%'), ':vsplit')<cr>
 
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-prettier',
+  \ 'coc-eslint',
+  \ 'coc-json',
+  \ 'coc-css',
+  \ 'coc-go',
+  \ 'coc-marketplace',
+  \ 'https://github.com/rodrigore/coc-tailwind-intellisense'
+\ ]
+
+let g:go_diagnostics_enabled = 0
+let g:go_metalinter_enabled = []
+" don't jump to errors after metalinter is invoked
+let g:go_jump_to_error = 0
+" run go imports on file save
+let g:go_fmt_command = "goimports"
+" automatically highlight variable your cursor is on
+let g:go_auto_sameids = 0
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -273,6 +309,11 @@ endfunction
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold   :call CocAction('fold', <f-args>)
 command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
+
+nnoremap <leader>oi :OR<cr>
+
+nmap <leader>do <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
