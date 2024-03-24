@@ -274,8 +274,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-css',
   \ 'coc-go',
-  \ 'coc-marketplace',
-  \ 'https://github.com/rodrigore/coc-tailwind-intellisense'
+  \ 'coc-marketplace'
 \ ]
 
 let g:go_diagnostics_enabled = 0

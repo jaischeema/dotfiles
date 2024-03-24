@@ -29,4 +29,11 @@ alias gh="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(
 alias ghp="git config remote.origin.url | sed -en 's/git@github\.com\:([^\/]*)\/(.*)\.git/https\:\/\/github.com\/\1\/\2\/pulls/p' | xargs open"
 alias hl="hledger"
 
+function gitfix() {
+  branch=`git symbolic-ref --short HEAD`
+  git branch --set-upstream-to="origin/$branch" "$branch"
+}
+
 source "$HOME/.zshenv_private"
+
+alias delete-branches="git branch --no-color | fzf -m | xargs -I {} git branch -D '{}'"

@@ -30,7 +30,9 @@
 [push]
   default = tracking
   recurseSubmodules = check
+	autoSetupRemote = true
 [diff]
+  tool = opendiff
   color-words =
   compactionHeuristic = true
 [difftool]
@@ -56,10 +58,15 @@
 [diff "exif"]
   textconv = exiftool
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
 [include]
   path = config_private
 [rebase]
 	autoStash = true
+[alias]
+	bc = "!f() { git switch -c `whoami`/`date +\"%Y%m%d\"`/$1; }; f"
+[init]
+	defaultBranch = main

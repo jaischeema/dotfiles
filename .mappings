@@ -10,12 +10,6 @@ vimrc = "~/.config/nvim/init.vim"
 zshrc = "~/.zshrc"
 zshenv = "~/.zshenv"
 
-# Link in parts from private submodule
-"private/ssh_config" = "~/.ssh/config_private"
-"private/zshenv" = "~/.zshenv_private"
-"private/gitconfig" = "~/.config/git/config_private"
-"private/ssh-keys" = "~/.ssh/keys"
-
 [linux]
 
 [freebsd]
